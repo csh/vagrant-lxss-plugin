@@ -36,8 +36,17 @@ vagrant plugin install pkg/vagrant-lxss-plugin-x.x.x.gem
 
 Once the plugin is installed you simply use `bash` instead of `ssh` when connecting to a VM.
 
+
+##### From the VM Directory
+
 ```
-vagrant bash homestead-7
+vagrant bash
 ```
 
+
+##### From elsewhere
+
+```
+vagrant bash <machine-id>
+```
 [install_bash]: http://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/
