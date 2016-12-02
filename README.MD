@@ -6,7 +6,7 @@ vagrant-lxss-plugin
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://raw.githubusercontent.com/csh/vagrant-lxss-plugin/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/csh/vagrant-lxss-plugin.svg?style=flat-square)](https://github.com/csh/vagrant-lxss-plugin/issues)
 
-Simple plugin to enable you to SSH into Vagrant machines using Bash on Ubuntu on Windows.
+Simple plugin that allows you to SSH into Vagrant machines using Bash on Ubuntu on Windows.
 
 _This serves as a way of getting me back into Ruby, so there may be some silly bugs._
 
