@@ -1,3 +1,4 @@
+require_relative 'errors'
 require 'optparse'
 
 module VagrantLxss
@@ -7,8 +8,7 @@ module VagrantLxss
     end
 
     def execute
-      raise Vagrant::Errors::CapabilityHostNotDetected unless is_win_x?
-      raise Vagrant::Errors::CapabilityNotFound unless is_bash_installed?
+      raise VagrantLxss::RequiredProcessNotFound unless is_bash_installed?
 
       options = {
         :help => false
@@ -38,7 +38,7 @@ module VagrantLxss
         ssh_options = ["#{ssh_info[:username]}@#{ssh_info[:host]}"]
         ssh_options += ["-p #{ssh_info[:port]}"] if ssh_info[:port] != 22
         ssh_options += ["-A"] if ssh_info[:forward_agent]
-        ssh_options += ["-v"]
+        # ssh_options += ["-v"]
 
         key_file = nil
         dir = nil
@@ -58,27 +58,14 @@ module VagrantLxss
         end
 
         command = "C:\\Windows\\system32\\bash.exe -c 'ssh #{ssh_options.join(' ')}'"
-        @logger.info("Full command: #{command}")
-        output = system(command)
-        @logger.info("Output: #{output}")
+        @logger.debug("Full command: \"#{command}\"")
+        system(command)
         return 0
       end
     end
 
     def is_bash_installed?
-      system("C:\\Windows\\system32\\bash.exe -c 'echo \"hello\"'")
-    end
-
-    def is_win_x?
-      false unless Gem.win_platform?
-      result = `cmd /C ver`
-      return result =~ /\[Version 10.*\]/
-    end
-
-    def convert_path (path)
-      path = path.gsub '\\', '/'
-      path = path.gsub (/^([A-Z])\:\//i) { '/mnt/' << $1.downcase << '/' }
-      return path
+      return system("C:\\Windows\\system32\\bash.exe -c 'printf \"\n\"'")
     end
   end
 end
