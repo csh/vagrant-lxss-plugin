@@ -15,7 +15,7 @@ module VagrantLxss
       }
 
       opts = OptionParser.new do |o|
-        o.banner = "Usage: vagrant bash [name|id]"
+        o.banner = "Usage: vagrant bash [name|id ...]"
         o.separator ""
 
         o.on("-h", "--help", "Display command help") do |h|
@@ -59,7 +59,9 @@ module VagrantLxss
 
         command = "C:\\Windows\\system32\\bash.exe -c 'ssh #{ssh_options.join(' ')}'"
         @logger.debug("Full command: \"#{command}\"")
-        system(command)
+        pid = spawn(command)
+        Process.waitpid pid
+        # system(command)
         return 0
       end
     end
